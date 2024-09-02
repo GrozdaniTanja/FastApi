@@ -23,8 +23,7 @@ A web application to display current weather and air pollution levels for a user
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-repo/weather-air-pollution-dashboard.git
-   cd weather-air-pollution-dashboard
+   git clone https://github.com/GrozdaniTanja/FastApi.git
    ```
 
 2. Install dependencies:
