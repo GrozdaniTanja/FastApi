@@ -1,0 +1,9 @@
+# Virtual environment
+fastenv/
+
+# Python cache files
+__pycache__/
+
+
+*.txt
+*.env
