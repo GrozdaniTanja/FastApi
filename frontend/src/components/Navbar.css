@@ -1,0 +1,48 @@
+.custom-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    padding-top: 1rem;
+}
+
+.nav-left, .nav-center, .nav-right {
+    flex: 1;
+}
+
+.nav-center {
+    display: flex;
+    justify-content: center;
+}
+
+.current-location {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 1rem;
+    padding-left: 1rem;
+}
+
+.location-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-right: 5rem;
+}
+
+
+.search-input {
+    width: 250px;
+}
+
+.search-button {
+    margin-left: 0.5rem;
+}
+
+.brand {
+    margin-left: 2rem;
+}

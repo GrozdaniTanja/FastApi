@@ -1,5 +1,3 @@
-import requests
-from app.utils.config import AIR_POLLUTION_URL, API_KEY
 from app.services.shared_service import fetch_data_from_apis
 from app.models.air_res import PollutionResponse
 from app.models.base import Location
