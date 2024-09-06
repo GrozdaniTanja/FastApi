@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { FaSearch } from 'react-icons/fa';
 import { CiLocationOn } from 'react-icons/ci';
@@ -8,6 +8,24 @@ const AppNavbar = () => {
     const [location, setLocation] = useState('');
     const [currentLocation, setCurrentLocation] = useState('Fetching location...');
 
+    const fetchCurrentLocation = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/current-location');
+            const data = await response.json();
+
+            const { location: { city_name, country } } = data;
+            setCurrentLocation(`${city_name}, ${country}`);
+        } catch (error) {
+            console.log('Error fetching current location:', error);
+            setCurrentLocation('Location not available');
+        }
+            
+    };
+
+    useEffect(() => {
+        fetchCurrentLocation();
+    }, []);
+    
     const handleLocationChange = (e) => {
         setLocation(e.target.value);
     };
