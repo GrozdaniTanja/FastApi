@@ -4,18 +4,19 @@ import { FaSearch } from 'react-icons/fa';
 import { CiLocationOn } from 'react-icons/ci';
 import './Navbar.css';
 
-const AppNavbar = () => {
-    const [location, setLocation] = useState('');
+const AppNavbar = ({ setLocation, setLatitude, setLongitude, setWeatherData }) => {
+    const [location, setLocationInput] = useState('');
     const [currentLocation, setCurrentLocation] = useState('Fetching location...');
-    const [latitude, setLatitude] = useState(null);
-    const [longitude, setLongitude] = useState(null);
+    const [latitude, setLat] = useState(null);
+    const [longitude, setLon] = useState(null);
 
     const fetchCurrentLocation = async (lat, lon) => {
         try {
             const response = await fetch(`http://localhost:8000/current-location?latitude=${lat}&longitude=${lon}`);
             const data = await response.json();
-            const { city, country } = data;
+            const { city, country, weather, pollution } = data;
             setCurrentLocation(`${city}, ${country}`);
+            setWeatherData({ city, country, weather, pollution });
         } catch (error) {
             console.log('Error fetching current location:', error);
             setCurrentLocation('Location not available');
@@ -26,8 +27,9 @@ const AppNavbar = () => {
         try {
             const response = await fetch(`http://localhost:8000/location/${city_name}`);
             const data = await response.json();
-            const { city, country } = data;
+            const { city, country, weather, pollution } = data;
             setCurrentLocation(`${city}, ${country}`);
+            setWeatherData({ city, country, weather, pollution });
         } catch (error) {
             console.log('Error fetching current location:', error);
             setCurrentLocation('Location not available');
@@ -40,9 +42,9 @@ const AppNavbar = () => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    setLatitude(latitude);
-                    setLongitude(longitude);
-                    fetchCurrentLocation(latitude, longitude);  // Fetch the city and country using backend
+                    setLat(latitude);
+                    setLon(longitude);
+                    fetchCurrentLocation(latitude, longitude);
                 },
                 (error) => {
                     console.error('Error getting location:', error);
@@ -59,7 +61,7 @@ const AppNavbar = () => {
     }, []);
 
     const handleLocationChange = (e) => {
-        setLocation(e.target.value);
+        setLocationInput(e.target.value);
     };
 
     const handleSearch = () => {

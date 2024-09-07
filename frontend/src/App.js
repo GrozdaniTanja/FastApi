@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Remove 'Switch', not needed in React Router v6
 import './App.css';
-import AppNavbar from './components/Navbar';  // Corrected import
+import AppNavbar from './components/Navbar';  
+import WeatherComponent from './components/WeatherComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Weather from './components/WeatherComponent';
 
 
 function App() {
+  const [location, setLocation] = useState('');
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
+
   return (
     <Router>
       <div className="App">
-        <AppNavbar />
+        <AppNavbar
+          setLocation={setLocation} 
+          setLatitude={setLatitude} 
+          setLongitude={setLongitude}
+          setWeatherData={setWeatherData} />
         <header className="App-header">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={
+              <WeatherComponent 
+              weatherData={weatherData}
+            />} />
           </Routes>
         </header>
       </div>
     </Router>
   );
 }
-
-
-const Home = () => <div>Home Page</div>;
 
 export default App;

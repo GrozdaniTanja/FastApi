@@ -54,3 +54,10 @@
 .brand {
     margin-left: 2rem;
 }
+
+
+.weather-card, .pollution-card {
+    margin: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+}
