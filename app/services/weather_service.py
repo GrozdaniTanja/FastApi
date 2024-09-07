@@ -1,10 +1,9 @@
-from app.services.shared_service import fetch_data_from_apis
-from app.models.weather_res import WeatherResponse
-from app.models.base import Location
+from app.services.fetch_data_service import fetch_data_from_apis
+from app.models.weather_response import WeatherResponse
 
 
-def get_weather(location: Location) -> WeatherResponse:
-    weather_data, _ = fetch_data_from_apis(location)
+def get_weather(lat: float, lon: float) -> WeatherResponse:
+    weather_data, _ = fetch_data_from_apis(lat, lon)
 
     temperature_celsius = weather_data["main"]["temp"] - 273.15
     max_temperature_celsius = weather_data["main"]["temp_max"] - 273.15

@@ -1,13 +1,12 @@
 import requests
-from app.utils.config import WEATHER_URL, AIR_POLLUTION_URL, API_KEY
-from app.models.base import Location
+from app.utils.config import Config
 
 
-def fetch_data_from_apis(location: Location):
-    weather_url = f"{WEATHER_URL}?lat={
-        location.lat}&lon={location.lon}&appid={API_KEY}"
-    air_pollution_url = f"{AIR_POLLUTION_URL}?lat={
-        location.lat}&lon={location.lon}&appid={API_KEY}"
+def fetch_data_from_apis(lat: float, lon: float):
+    weather_url = f"{Config.WEATHER_URL}?lat={
+        lat}&lon={lon}&appid={Config.API_KEY}"
+    air_pollution_url = f"{Config.AIR_POLLUTION_URL}?lat={
+        lat}&lon={lon}&appid={Config.API_KEY}"
 
     weather_response = requests.get(weather_url)
 

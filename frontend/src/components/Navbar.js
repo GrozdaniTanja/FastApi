@@ -7,34 +7,71 @@ import './Navbar.css';
 const AppNavbar = () => {
     const [location, setLocation] = useState('');
     const [currentLocation, setCurrentLocation] = useState('Fetching location...');
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
 
-    const fetchCurrentLocation = async () => {
+    const fetchCurrentLocation = async (lat, lon) => {
         try {
-            const response = await fetch('http://localhost:8000/current-location');
+            const response = await fetch(`http://localhost:8000/current-location?latitude=${lat}&longitude=${lon}`);
             const data = await response.json();
-
-            const { location: { city_name, country } } = data;
-            setCurrentLocation(`${city_name}, ${country}`);
+            const { city, country } = data;
+            setCurrentLocation(`${city}, ${country}`);
         } catch (error) {
             console.log('Error fetching current location:', error);
             setCurrentLocation('Location not available');
         }
-            
+    };
+
+    const fetchSerchLocation = async (city_name) => {
+        try {
+            const response = await fetch(`http://localhost:8000/location/${city_name}`);
+            const data = await response.json();
+            const { city, country } = data;
+            setCurrentLocation(`${city}, ${country}`);
+        } catch (error) {
+            console.log('Error fetching current location:', error);
+            setCurrentLocation('Location not available');
+        }
+    };
+
+
+    const getGeolocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLatitude(latitude);
+                    setLongitude(longitude);
+                    fetchCurrentLocation(latitude, longitude);  // Fetch the city and country using backend
+                },
+                (error) => {
+                    console.error('Error getting location:', error);
+                    setCurrentLocation('Location access denied');
+                }
+            );
+        } else {
+            setCurrentLocation('Geolocation is not supported by the browser');
+        }
     };
 
     useEffect(() => {
-        fetchCurrentLocation();
+        getGeolocation(); 
     }, []);
-    
+
     const handleLocationChange = (e) => {
         setLocation(e.target.value);
     };
 
     const handleSearch = () => {
         if (location) {
-            setCurrentLocation(location);
-            // Call backend to get weather/air pollution based on the location
-            // fetchWeatherAndPollutionData(location);
+            fetchSerchLocation(location);
+        } else {
+            if (latitude, longitude) {
+                fetchCurrentLocation(latitude, longitude)
+            } else {
+                setCurrentLocation('Fetching location...');
+                getGeolocation();
+            }
         }
     };
 

@@ -10,6 +10,14 @@
     flex: 1;
 }
 
+.nav-left {
+    margin-left: 25rem;
+}
+
+.nav-center {
+    margin-left: 25rem;
+}
+
 .nav-center {
     display: flex;
     justify-content: center;

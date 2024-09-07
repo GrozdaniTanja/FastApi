@@ -1,10 +1,9 @@
-from app.services.shared_service import fetch_data_from_apis
-from app.models.air_res import PollutionResponse
-from app.models.base import Location
+from app.services.fetch_data_service import fetch_data_from_apis
+from app.models.pollution_response import PollutionResponse
 
 
-def get_air_pollution(location: Location) -> PollutionResponse:
-    _, air_pollution_data = fetch_data_from_apis(location)
+def get_air_pollution(lat: float, lon: float) -> PollutionResponse:
+    _, air_pollution_data = fetch_data_from_apis(lat, lon)
 
     air_data = air_pollution_data["list"][0]
 
