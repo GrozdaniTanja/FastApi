@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';  // Remove 'Switch', not needed in React Router v6
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import './App.css';
 import AppNavbar from './components/Navbar';  
 import WeatherComponent from './components/WeatherComponent';

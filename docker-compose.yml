@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  backend:
+    image: tanjag/fast_api_backend:0.0.0
+    container_name: fastapi-backend
+    ports:
+      - "8000:8000"  
+    env_file:
+      - /.env
+    networks:
+      - app-networks
+  
+  frontend:
+    image: tanjag/fast_api_frontend:0.0.0
+    container_name: react-frontend
+    ports:
+      - "3000:3000"  
+    depends_on:
+      - backend
+    networks:
+      - app-networks
+
+networks:
+  app-networks:
+    driver: bridge
