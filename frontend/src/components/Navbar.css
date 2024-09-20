@@ -1,63 +1,97 @@
 .custom-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    padding-top: 1rem;
+  display: flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  padding-top: 1rem;
 }
 
-.nav-left, .nav-center, .nav-right {
-    flex: 1;
+.nav-left,
+.nav-center,
+.nav-right {
+  flex: 1;
+  display: flex;
 }
 
 .nav-left {
-    margin-left: 25rem;
+  justify-content: flex-start;
 }
 
 .nav-center {
-    margin-left: 25rem;
-}
-
-.nav-center {
-    display: flex;
-    justify-content: center;
+  justify-content: center;
 }
 
 .current-location {
-    display: flex;
-    align-items: center;
-    color: white;
-    font-size: 1rem;
-    padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 1rem;
+  padding-left: 1rem;
 }
 
 .location-icon {
-    font-size: 1.5rem;
-    margin-right: 0.5rem;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .search-form {
-    display: flex;
-    align-items: center;
-    margin-right: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-
 .search-input {
-    width: 250px;
+  width: 250px; 
+  max-width: 100%; 
 }
 
 .search-button {
-    margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .brand {
-    margin-left: 2rem;
+  margin-left: 1rem;
 }
 
+@media (max-width: 768px) {
+  .nav-left,
+  .nav-center,
+  .nav-right {
+    margin-left: 0;
+  }
 
-.weather-card, .pollution-card {
-    margin: 10px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
+  .nav-left {
+    justify-content: center;
+  }
+
+  .nav-center {
+    flex-basis: 100%;
+    margin: 0;
+  }
+
+  .search-input {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .current-location {
+    font-size: 0.9rem; 
+  }
+
+  .location-icon {
+    font-size: 1.2rem;
+  }
+
+  .search-input {
+    width: 100px;
+  }
+}
+
+.weather-card,
+.pollution-card {
+  margin: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
 }
